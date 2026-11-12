@@ -82,7 +82,7 @@ def test_vercel_blob_storage_writes_private_json(monkeypatch) -> None:
     def fake_put(path: str, body: bytes, **options) -> None:
         captured.update(path=path, body=body, options=options)
 
-    monkeypatch.setattr("app.storage.blob.put", fake_put)
+    monkeypatch.setattr("app.storage.put_blob", fake_put)
     contact = StoredContact(
         id="receipt-123",
         created_at=datetime(2026, 11, 12, 4, 45, tzinfo=UTC),

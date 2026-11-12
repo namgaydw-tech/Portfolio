@@ -5,7 +5,7 @@ import sqlite3
 from pathlib import Path
 from typing import Protocol
 
-from vercel import blob
+from vercel.blob.sync import put_blob
 
 from .models import StoredContact
 
@@ -59,7 +59,7 @@ class SQLiteContactStorage:
 class VercelBlobContactStorage:
     def save(self, contact: StoredContact) -> None:
         day = contact.created_at.strftime("%Y/%m/%d")
-        blob.put(
+        put_blob(
             f"contact-messages/{day}/{contact.id}.json",
             json.dumps(contact.model_dump(mode="json"), separators=(",", ":")).encode(),
             access="private",
