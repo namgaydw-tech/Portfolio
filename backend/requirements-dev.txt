@@ -1,0 +1,6 @@
+-r requirements.txt
+httpx==0.28.1
+pytest==8.4.2
+ruff==0.14.3
+uvicorn==0.47.0
+

@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body { margin: 0; min-width: 320px; background: #f4f1e8; text-rendering: optimizeLegibility; }
+  ::selection { background: #b9e769; color: #07110d; }
+  :focus-visible { outline: 3px solid #b9e769; outline-offset: 4px; }
+}
+
+@layer components {
+  .page-shell { @apply mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-12; }
+  .section-space { @apply py-24 sm:py-32; }
+  .nav-link { @apply text-sm font-medium text-white/65 transition hover:text-white; }
+  .eyebrow { @apply text-xs font-bold uppercase tracking-[.24em]; }
+  .section-number { @apply text-xs font-bold uppercase tracking-[.2em] text-fern; }
+  .section-title { @apply max-w-4xl font-display text-5xl leading-[.98] tracking-[-.04em] sm:text-7xl; }
+  .button-light { @apply inline-flex items-center gap-3 rounded-full bg-lime px-6 py-3.5 text-sm font-bold text-ink transition hover:-translate-y-0.5 hover:bg-white; }
+  .button-dark { @apply inline-flex items-center gap-3 rounded-full bg-ink px-6 py-3.5 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-fern; }
+  .button-outline { @apply inline-flex items-center rounded-full border border-white/25 px-6 py-3.5 text-sm font-bold text-white transition hover:border-white hover:bg-white/5; }
+  .project-row { @apply grid gap-8 border-b border-ink/15 py-10 lg:grid-cols-[1fr_1fr_auto] lg:items-start; }
+  .tag { @apply rounded-full border border-ink/15 px-3 py-1 text-xs text-ink/55; }
+  .field-label { @apply block text-xs font-bold uppercase tracking-[.14em] text-ink/65; }
+  .field { @apply mt-2 block w-full rounded-xl border border-ink/15 bg-paper/60 px-4 py-3 text-base font-normal normal-case tracking-normal text-ink transition placeholder:text-ink/30 focus:border-fern focus:outline-none focus:ring-2 focus:ring-fern/15; }
+  .social-link { @apply grid h-11 w-11 place-items-center rounded-full border border-white/20 transition hover:border-lime hover:text-lime; }
+}
+
+.hero-grid {
+  background-image: linear-gradient(rgba(255,255,255,.055) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.055) 1px, transparent 1px);
+  background-size: 70px 70px;
+  mask-image: linear-gradient(to bottom, black, transparent 85%);
+}
+
+.orb { background: radial-gradient(circle at 35% 35%, rgba(185,231,105,.35), rgba(31,92,67,.14) 42%, transparent 70%); filter: blur(2px); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+}
+
