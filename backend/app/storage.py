@@ -11,7 +11,7 @@ from .models import StoredContact
 
 
 class ContactStorage(Protocol):
-    async def save(self, contact: StoredContact) -> None: ...
+    def save(self, contact: StoredContact) -> None: ...
 
 
 class SQLiteContactStorage:
@@ -50,16 +50,16 @@ class SQLiteContactStorage:
             )
             connection.commit()
 
-    async def save(self, contact: StoredContact) -> None:
+    def save(self, contact: StoredContact) -> None:
         # A contact write is tiny and short-lived. Keeping the operation here avoids
         # platform-specific thread-pool startup issues in serverless runtimes.
         self.save_sync(contact)
 
 
 class VercelBlobContactStorage:
-    async def save(self, contact: StoredContact) -> None:
+    def save(self, contact: StoredContact) -> None:
         day = contact.created_at.strftime("%Y/%m/%d")
-        await blob.put_blob(
+        blob.put(
             f"contact-messages/{day}/{contact.id}.json",
             json.dumps(contact.model_dump(mode="json"), separators=(",", ":")).encode(),
             access="private",

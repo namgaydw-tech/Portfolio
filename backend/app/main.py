@@ -23,7 +23,7 @@ async def persist_contact(
         subject=submission.subject,
         message=submission.message,
     )
-    await storage.save(contact)
+    storage.save(contact)
     return ContactResponse(id=contact.id)
 
 

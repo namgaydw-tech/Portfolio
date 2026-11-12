@@ -10,7 +10,7 @@ from pydantic import ValidationError
 from app.config import Settings
 from app.main import create_app
 from app.models import ContactSubmission, StoredContact
-from app.storage import SQLiteContactStorage
+from app.storage import SQLiteContactStorage, VercelBlobContactStorage
 
 
 def valid_payload() -> dict[str, str]:
@@ -74,3 +74,30 @@ def test_honeypot_field_is_rejected() -> None:
     payload["website"] = "https://spam.invalid"
     with pytest.raises(ValidationError):
         ContactSubmission(**payload)
+
+
+def test_vercel_blob_storage_writes_private_json(monkeypatch) -> None:
+    captured: dict[str, object] = {}
+
+    def fake_put(path: str, body: bytes, **options) -> None:
+        captured.update(path=path, body=body, options=options)
+
+    monkeypatch.setattr("app.storage.blob.put", fake_put)
+    contact = StoredContact(
+        id="receipt-123",
+        created_at=datetime(2026, 11, 12, 4, 45, tzinfo=UTC),
+        name="Production Test",
+        email="test@example.com",
+        subject="Storage verification",
+        message="This verifies the private Blob storage adapter.",
+    )
+
+    VercelBlobContactStorage().save(contact)
+
+    assert captured["path"] == "contact-messages/2026/11/12/receipt-123.json"
+    assert b'"id":"receipt-123"' in captured["body"]
+    assert captured["options"] == {
+        "access": "private",
+        "add_random_suffix": False,
+        "content_type": "application/json",
+    }
