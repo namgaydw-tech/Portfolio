@@ -5,17 +5,18 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        display: ['Georgia', 'Cambria', 'Times New Roman', 'serif'],
+        display: ['Instrument Serif', 'Georgia', 'serif'],
+        mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
       },
       colors: {
-        ink: '#07110d',
-        paper: '#f4f1e8',
-        fern: '#1f5c43',
-        lime: '#b9e769',
-        mist: '#dfe8df',
+        obsidian: '#101110',
+        charcoal: '#242522',
+        brass: '#B5A07C',
+        ivory: '#F1EDE4',
+        sage: '#777C70',
       },
       boxShadow: {
-        soft: '0 24px 80px rgba(4, 15, 10, 0.14)',
+        soft: '0 24px 80px rgba(16, 17, 16, 0.10)',
       },
     },
   },

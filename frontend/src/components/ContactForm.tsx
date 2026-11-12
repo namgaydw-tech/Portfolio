@@ -34,7 +34,7 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={submit} className="rounded-[2rem] bg-white p-6 text-ink shadow-soft sm:p-8" aria-label="Contact form">
+    <form onSubmit={submit} className="border border-white/12 bg-obsidian/35 p-6 text-ivory sm:p-9" aria-label="Contact form">
       <div className="grid gap-5 sm:grid-cols-2">
         <label className="field-label">
           Name
@@ -62,7 +62,7 @@ export function ContactForm() {
           {status === 'submitting' ? 'Sending…' : 'Send message'}
           <ArrowUpRight size={17} aria-hidden="true" />
         </button>
-        <p className={`max-w-xs text-sm ${status === 'error' ? 'text-red-700' : 'text-fern'}`} role="status">
+        <p className={`max-w-xs text-sm ${status === 'error' ? 'text-red-300' : 'text-brass'}`} role="status">
           {status === 'success' && <CheckCircle2 className="mr-1 inline" size={16} aria-hidden="true" />}
           {feedback}
         </p>
